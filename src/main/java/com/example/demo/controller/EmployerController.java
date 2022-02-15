@@ -33,6 +33,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/employer")
+@CrossOrigin("*")
 @PreAuthorize("hasRole('ROLE_EMPLOYER')")
 public class EmployerController {
 

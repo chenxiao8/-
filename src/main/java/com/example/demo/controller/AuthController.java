@@ -23,6 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
 
     private final UserMapper userMapper;

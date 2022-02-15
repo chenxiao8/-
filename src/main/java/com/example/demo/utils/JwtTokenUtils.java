@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class JwtTokenUtils {
     private static final String ISS = "esiek";
 
     private static final long EXPIRATION = 3600L;
-    private static final long REMBERME = 3600 * 3600 *12 * 7L;
+    private static final long REMBERME = 1000 * 24 * 60 * 60 * 1000L;
     // 角色的key
     private static final String ROLE_CLAIMS = "rol";
 
@@ -33,7 +34,7 @@ public class JwtTokenUtils {
                 .setIssuer(ISS) // 签发者
                 .setSubject(username)   // 主体
                 .setIssuedAt(new Date())    // 签名时间
-                .setExpiration(new Date(System.currentTimeMillis()+expiration))// 过期时间
+                .setExpiration(new Date(Instant.now().toEpochMilli() +expiration))// 过期时间
                 .compact();
     }
 

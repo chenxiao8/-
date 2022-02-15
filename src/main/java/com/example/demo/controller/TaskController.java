@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin("*")
 public class TaskController {
 
     @GetMapping

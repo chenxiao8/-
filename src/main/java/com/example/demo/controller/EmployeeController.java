@@ -33,6 +33,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employee")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
     private final CVOfferMapper cvOfferMapper;
