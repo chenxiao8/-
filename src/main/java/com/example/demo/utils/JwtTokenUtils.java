@@ -19,7 +19,7 @@ public class JwtTokenUtils {
     private static final String SECRET = "jwtsecretdemo";
     private static final String ISS = "esiek";
 
-    private static final long EXPIRATION = 3600L;
+    private static final long EXPIRATION = 1000 * 24 * 60 * 60 * 1000L;
     private static final long REMBERME = 1000 * 24 * 60 * 60 * 1000L;
     // 角色的key
     private static final String ROLE_CLAIMS = "rol";
