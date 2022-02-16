@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import cn.hutool.json.JSONObject;
 import com.example.demo.entity.RespondResult;
 import com.example.demo.entity.sys.User;
 import com.example.demo.entity.vo.RegisterUserVO;
@@ -14,6 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 李昕
@@ -74,6 +77,12 @@ public class AuthController {
         }
         User user = userMapper.findByUsername(userName);
         String role = user.getRole();
-        return RespondResult.success(role);
+        String username = SecurityUtils.getUserName();
+        JSONObject jsonObject = new JSONObject();
+        Map<String,String> map = new HashMap<>();
+        map.put("username",username);
+        map.put("role",role);
+        jsonObject.putAll(map);
+        return RespondResult.success(map);
     }
 }
