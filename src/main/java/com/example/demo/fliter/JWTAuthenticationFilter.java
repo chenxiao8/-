@@ -89,6 +89,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.getWriter().write("密码或者用户名错误");
+        response.getOutputStream().write("用户名或密码错误".getBytes());
     }
 }

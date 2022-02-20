@@ -26,7 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin
 public class AuthController {
 
     private final UserMapper userMapper;

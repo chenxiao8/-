@@ -28,6 +28,8 @@ public class JwtTokenUtils {
         long expiration = rememberMe  ? REMBERME : EXPIRATION;
         HashMap<String,Object> map = new HashMap<>();
         map.put(ROLE_CLAIMS,role);
+        System.out.println(new Date());
+        System.out.println(new Date(Instant.now().toEpochMilli() +expiration));
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512,SECRET)  // 签名方式
                 .setClaims(map)
