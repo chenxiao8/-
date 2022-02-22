@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 /**
  * @author 李昕
@@ -25,10 +22,11 @@ public class RegisterUserVO {
 
     @Email(message = "邮箱格式错误")
     private String email;
-    @Length(min = 6,max = 14,message = "密码长度必须为6-14")
+    @Length(min = 6, max = 14, message = "密码长度必须为6-14")
     @NotNull
     private String password;
-    @Min(0)
-    @Max(1)
+
+    @Min(value = 0,message="用户类型错误")
+    @Max(value = 1,message="用户类型错误")
     private Integer type;
 }

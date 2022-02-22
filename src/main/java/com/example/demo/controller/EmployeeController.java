@@ -121,11 +121,11 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping("/cvoffer")
-    public ResponseEntity addOfferCV(@RequestBody JSONObject jsonObject) {
+    @PostMapping("/cvoffer/{id}")
+    public ResponseEntity addOfferCV(@PathVariable("id") Integer id,@RequestBody JSONObject jsonObject) {
         try {
             // 这是要投递的招聘信息的id
-            Integer id = (Integer) jsonObject.get("id");
+            //Integer id = (Integer) jsonObject.get("id");
             // 查询简历后执行投递操作.
             String userName = SecurityUtils.getUserName();
             CVDO cv = cvMapper.findByUserName(userName);
