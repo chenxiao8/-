@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2022/1/4 14:23
  */
 @Repository
-public interface JobInformationMapper  extends BaseMapper<JobInformationDO> {
+public interface JobInformationMapper extends BaseMapper<JobInformationDO> {
 
     @Select("select * from job_information where user_id = #{id}")
     public List<JobInformationDO> findJobInformationByUserId(Integer id);

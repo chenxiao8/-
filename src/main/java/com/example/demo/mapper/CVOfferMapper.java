@@ -15,7 +15,7 @@ import java.util.List;
 public interface CVOfferMapper extends BaseMapper<CVOfferDO> {
 
     @Select("select * from cv_offer where job_id = #{id} and user_id = (select id from user where username = #{username}) limit 1")
-    public CVOfferDO findByJobIdAndUserName(Integer id,String username);
+    public CVOfferDO findByJobIdAndUserName(Integer id, String username);
 
     @Select("select * from cv_offer where user_id = (select id from user where username = #{username})")
     public List<CVOfferDO> findByUserName(String username);

@@ -9,8 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class SecurityUtils {
 
-    public static String getUserName(){
-        return (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public static String getUserName() {
+        return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     }
 }

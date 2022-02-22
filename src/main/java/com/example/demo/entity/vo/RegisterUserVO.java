@@ -26,7 +26,7 @@ public class RegisterUserVO {
     @NotNull
     private String password;
 
-    @Min(value = 0,message="用户类型错误")
-    @Max(value = 1,message="用户类型错误")
+    @Min(value = 0, message = "用户类型错误")
+    @Max(value = 1, message = "用户类型错误")
     private Integer type;
 }

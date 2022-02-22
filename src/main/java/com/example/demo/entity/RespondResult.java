@@ -20,16 +20,16 @@ public class RespondResult<T> implements Serializable {
     private T data;
 
     // 成功返回
-    public static ResponseEntity<Object> success(Object data){
+    public static ResponseEntity<Object> success(Object data) {
         RespondResult<Object> result = new RespondResult<>();
         result.setData(data);
         return new ResponseEntity<>(data, HttpStatus.valueOf(200));
     }
 
     // 失败返回
-    public static ResponseEntity<Object> error(String msg,Integer code){
+    public static ResponseEntity<Object> error(String msg, Integer code) {
         RespondResult<Object> result = new RespondResult<>();
         result.setMsg(msg);
-        return new ResponseEntity<>(result,HttpStatus.valueOf(code));
+        return new ResponseEntity<>(result, HttpStatus.valueOf(code));
     }
 }

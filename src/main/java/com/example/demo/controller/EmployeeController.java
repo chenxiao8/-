@@ -69,7 +69,7 @@ public class EmployeeController {
 
     @PutMapping("/cv")
     public ResponseEntity updateCV(
-                                   @Valid @RequestBody CVVO cvvo) {
+            @Valid @RequestBody CVVO cvvo) {
         try {
             String username = SecurityUtils.getUserName();
             CVDO byUserName = cvMapper.findByUserName(username);
@@ -122,7 +122,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/cvoffer/{id}")
-    public ResponseEntity addOfferCV(@PathVariable("id") Integer id,@RequestBody JSONObject jsonObject) {
+    public ResponseEntity addOfferCV(@PathVariable("id") Integer id, @RequestBody JSONObject jsonObject) {
         try {
             // 这是要投递的招聘信息的id
             //Integer id = (Integer) jsonObject.get("id");
@@ -170,28 +170,28 @@ public class EmployeeController {
     }
 
     @GetMapping("/myJobInformation")
-    public ResponseEntity getOfferJobInformation(){
-        try{
+    public ResponseEntity getOfferJobInformation() {
+        try {
             // 先查cv_offer中属于自己username的部分
             String username = SecurityUtils.getUserName();
             List<CVOfferDO> cvoffers = cvOfferMapper.findByUserName(username);
 
             // 新建list，对每一个cvoffer新建offerJobInformationVO
             List<OfferJobInformationVO> offerJobInformationVOS = new ArrayList<>();
-            for(CVOfferDO cvOfferDO:cvoffers){
+            for (CVOfferDO cvOfferDO : cvoffers) {
                 // 根据jobId查询工作信息
                 JobInformationDO jobInformationById = jobInformationMapper.findJobInformationById(cvOfferDO.getJobId());
                 OfferJobInformationVO offerJobInformationVO = new OfferJobInformationVO();
                 // 复制工作信息
-                BeanUtils.copyProperties(jobInformationById,offerJobInformationVO);
+                BeanUtils.copyProperties(jobInformationById, offerJobInformationVO);
                 // 复制状态
                 offerJobInformationVO.setStatus(cvOfferDO.getStatus());
                 offerJobInformationVOS.add(offerJobInformationVO);
             }
             return RespondResult.success(offerJobInformationVOS);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return RespondResult.error("错误",500);
+            return RespondResult.error("错误", 500);
         }
     }
 }

@@ -27,13 +27,13 @@ import java.util.Collection;
  * 该拦截器用于获取用户登录的信息，只需创建一个token并调用authenticationManager.authenticate()
  * 让spring-security去进行验证就可以了，不用自己查数据库再对比密码了，这一步交给spring去操作。
  * 这个操作有点像是shiro的subject.login(new UsernamePasswordToken())，验证的事情交给框架。
- *
  */
 @Slf4j
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager){
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         // 设置登录路径
         super.setFilterProcessesUrl("/api/login");
@@ -42,12 +42,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         // 从输入流中获取登录信息
-        try{
+        try {
             LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
             log.info(loginUser.toString());
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(),loginUser.getPassword(),new ArrayList<>()));
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>()));
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -55,6 +55,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     /**
      * 验证成功后进入的方法,需要产生token返回
+     *
      * @param request
      * @param response
      * @param chain
@@ -73,17 +74,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
-        String token = JwtTokenUtils.createToken(jwtUser.getUsername(),role,false);
+        String token = JwtTokenUtils.createToken(jwtUser.getUsername(), role, false);
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
-        response.setHeader("Access-Control-Expose-Headers","token");
-        response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX+token);
-        response.getOutputStream().write((JwtTokenUtils.TOKEN_PREFIX+token).getBytes());
+        response.setHeader("Access-Control-Expose-Headers", "token");
+        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+        response.getOutputStream().write((JwtTokenUtils.TOKEN_PREFIX + token).getBytes());
     }
 
     /**
      * 失败时调用的方法
+     *
      * @param request
      * @param response
      * @param failed

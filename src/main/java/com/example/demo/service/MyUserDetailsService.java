@@ -18,6 +18,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.findByUsername(username);

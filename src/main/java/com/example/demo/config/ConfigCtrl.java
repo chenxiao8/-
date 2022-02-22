@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -29,9 +30,11 @@ public class ConfigCtrl implements Filter {
             chain.doFilter(req, res);
         }
     }
+
     @Override
     public void destroy() {
     }
+
     @Override
     public void init(FilterConfig config) throws ServletException {
     }
