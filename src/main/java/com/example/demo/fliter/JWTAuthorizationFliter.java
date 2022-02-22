@@ -1,6 +1,7 @@
 package com.example.demo.fliter;
 
 import com.example.demo.utils.JwtTokenUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ import java.util.Collections;
  * @author 李昕
  * @date 2021/12/22 13:07
  */
+@Slf4j
 public class JWTAuthorizationFliter extends BasicAuthenticationFilter {
 
     public JWTAuthorizationFliter(AuthenticationManager authenticationManager){
@@ -37,6 +39,7 @@ public class JWTAuthorizationFliter extends BasicAuthenticationFilter {
         }
         // 如果请求头中有token，则进行解析，并设置认证信息
         SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
+        log.info(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
         super.doFilterInternal(request,response,chain);
     }
 

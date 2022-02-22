@@ -4,6 +4,7 @@ import com.example.demo.entity.sys.JwtUser;
 import com.example.demo.entity.sys.LoginUser;
 import com.example.demo.utils.JwtTokenUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ import java.util.Collection;
  * 这个操作有点像是shiro的subject.login(new UsernamePasswordToken())，验证的事情交给框架。
  *
  */
+@Slf4j
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -42,6 +44,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 从输入流中获取登录信息
         try{
             LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
+            log.info(loginUser.toString());
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(),loginUser.getPassword(),new ArrayList<>()));
 
         }catch (IOException e){

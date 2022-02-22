@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 //该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，
                 .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
                 //该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。
