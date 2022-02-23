@@ -15,6 +15,7 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.utils.Const;
 import com.example.demo.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,7 @@ import java.util.List;
 @RequestMapping("/api/employee")
 @RequiredArgsConstructor
 @CrossOrigin
+@Slf4j
 @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
     private final CVOfferMapper cvOfferMapper;
@@ -183,6 +185,9 @@ public class EmployeeController {
                 JobInformationDO jobInformationById = jobInformationMapper.findJobInformationById(cvOfferDO.getJobId());
                 OfferJobInformationVO offerJobInformationVO = new OfferJobInformationVO();
                 // 复制工作信息
+                if(jobInformationById==null){
+                    log.info("Unknown jobId: "+cvOfferDO.getJobId().toString());
+                }
                 BeanUtils.copyProperties(jobInformationById, offerJobInformationVO);
                 // 复制状态
                 offerJobInformationVO.setStatus(cvOfferDO.getStatus());
