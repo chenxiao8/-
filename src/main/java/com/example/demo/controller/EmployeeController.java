@@ -187,6 +187,7 @@ public class EmployeeController {
                 // 复制工作信息
                 if(jobInformationById==null){
                     log.info("Unknown jobId: "+cvOfferDO.getJobId().toString());
+                    continue;
                 }
                 BeanUtils.copyProperties(jobInformationById, offerJobInformationVO);
                 // 复制状态
