@@ -122,7 +122,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/cvoffer/{id}")
-    public ResponseEntity addOfferCV(@PathVariable("id") Integer id, @RequestBody JSONObject jsonObject) {
+    public ResponseEntity addOfferCV(@PathVariable("id") Integer id) {
         try {
             // 这是要投递的招聘信息的id
             //Integer id = (Integer) jsonObject.get("id");
