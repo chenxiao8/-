@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class OfferJobInformationVO {
     @NotNull
+    private Integer id;
+    @NotNull
     private String content;
     @NotNull
     private String position;
