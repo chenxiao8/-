@@ -16,8 +16,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CVVO {
     @NotNull
-    Integer id;
-    @NotNull
     private String name;
     @NotNull
     @Email

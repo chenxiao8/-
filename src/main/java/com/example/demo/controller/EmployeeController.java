@@ -158,13 +158,7 @@ public class EmployeeController {
         try {
             // 得到所有的招聘信息。遍历数据库元素即可。
             List<JobInformationDO> jobInformationDOS = jobInformationMapper.selectList(null);
-            List<JobInformationVO> jobInformationVOS = new ArrayList<>();
-            for (JobInformationDO jobInformationDO : jobInformationDOS) {
-                JobInformationVO jobInformationVO = new JobInformationVO();
-                BeanUtils.copyProperties(jobInformationDO, jobInformationVO);
-                jobInformationVOS.add(jobInformationVO);
-            }
-            return RespondResult.success(jobInformationVOS);
+            return RespondResult.success(jobInformationDOS);
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("错误", 500);
