@@ -19,8 +19,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class JobInformationVO {
     @NotNull
-    private Integer id;
-    @NotNull
     private String content;
     @NotNull
     private String position;
